@@ -311,7 +311,24 @@ Item* Player::getWeapon(bool ignoreAmmo)
 		if(!ignoreAmmo && item->getAmmoType() != AMMO_NONE)
 		{
 			Item* ammoItem = getInventoryItem(SLOT_AMMO);
-			if(ammoItem && ammoItem->getAmmoType() == item->getAmmoType())
+			if (!ammoItem)
+			{
+				return NULL;
+			}
+
+			if (Container* container = ammoItem->getContainer())
+			{
+				for(ContainerIterator iter = container->begin(), end = container->end(); iter != end; ++iter)
+				{
+					if (item->getAmmoType() == (*iter)->getAmmoType())
+					{
+						ammoItem = (*iter);
+						break;
+					}
+				}
+			}
+
+			if(ammoItem->getAmmoType() == item->getAmmoType())
 			{
 				if(g_weapons->getWeapon(ammoItem))
 				{

@@ -1375,7 +1375,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 			s << ")";
 	}
 	else if(it.isContainer())
-		s << " (Vol:" << (int32_t)it.maxItems << ")";
+		s << " (Vol:" << (item->getName() == "Quiver" ? 4 : (int32_t)it.maxItems) << ")";
 	else if(it.isKey())
 		s << " (Key:" << (item ? (int32_t)item->getActionId() : 0) << ")";
 	else if(it.isFluidContainer())

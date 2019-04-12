@@ -1982,7 +1982,7 @@ void ProtocolGame::sendContainer(uint32_t cid, const Container* container, bool 
 
 		msg->putItemId(container);
 		msg->putString(container->getName());
-		msg->put<char>(container->capacity());
+		msg->put<char>(container->getName() == "Quiver" ? 4 : container->capacity());
 
 		msg->put<char>(hasParent ? 0x01 : 0x00);
 		msg->put<char>(std::min(container->size(), (uint32_t)255));
