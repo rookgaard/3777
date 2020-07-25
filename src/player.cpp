@@ -318,12 +318,15 @@ Item* Player::getWeapon(bool ignoreAmmo)
 
 			if (Container* container = ammoItem->getContainer())
 			{
-				for(ContainerIterator iter = container->begin(), end = container->end(); iter != end; ++iter)
+				if (container->getName() == "Quiver")
 				{
-					if (item->getAmmoType() == (*iter)->getAmmoType())
+					for (ContainerIterator iter = container->begin(), end = container->end(); iter != end; ++iter)
 					{
-						ammoItem = (*iter);
-						break;
+						if (item->getAmmoType() == (*iter)->getAmmoType())
+						{
+							ammoItem = (*iter);
+							break;
+						}
 					}
 				}
 			}
